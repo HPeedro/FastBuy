@@ -2,7 +2,7 @@
 <html lang="">
 
 <head>
-  <title>FastBuy</title>
+  <title>PUC-Shop</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
@@ -11,7 +11,7 @@
 <body id="top">
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
-  <div class="wrapper bgded overlay parallax" style="background-image:url('images/demo/backgrounds/01.png');">
+  <div class="wrapper bgded overlay parallax" style="background-image:url('images/demo/backgrounds/01.jpg');">
     <div class="hoc clear">
       <!-- ################################################################################################ -->
       <nav id="mainav">
@@ -20,6 +20,9 @@
           <li><a class="drop" href="#">Produtos</a>
             <ul>
               <li><a href="http://localhost:3000/index/products">Todos os produtos</a></li>
+              <% if (user == "ADMIN") { %>
+                <li><a href="http://localhost:3000/cadastroproduto">Cadastrar Produto</a></li>
+              <%}%>
             </ul>
           </li>
           <li><a href="http://localhost:3000/index/carrinho">Carrinho</a></li>
@@ -74,7 +77,7 @@
     <footer id="footer" class="hoc clear">
       <!-- ################################################################################################ -->
       <div class="one_quarter first">
-        <h1 class="logoname clear"><a href="index.html"><i class="fas fa-handshake"></i> <span>FastBuy</span></a></h1>
+        <h1 class="logoname clear"><a href="index.html"><i class="fas fa-handshake"></i> <span>PUC-Shop</span></a></h1>
         <p class="btmspace-30">Os melhores preços<a href="#">&hellip;</a></p>
         <ul class="faico clear">
           <li><a class="faicon-facebook" href="#"><i class="fab fa-facebook"></i></a></li>
@@ -110,7 +113,7 @@
             <article>
               <li><i class="fas fa-phone"></i> +55 (19) 99938-1313</li>
               <li><i class="fas fa-fax"></i> +55 (19) 99938-1313</li>
-              <li><i class="far fa-envelope"></i> info@FastBuy.com</li>
+              <li><i class="far fa-envelope"></i> info@PUC-Shop.com</li>
             </article>
           </li>
         </ul>

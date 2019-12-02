@@ -66,6 +66,9 @@
 							<li><a class="drop" href="#">Produtos</a>
 							  <ul>
 								<li><a href="http://localhost:3000/index/products">Todos os produtos</a></li>
+								<% if (user == "ADMIN") { %>
+									<li><a href="http://localhost:3000/cadastroproduto">Cadastrar Produto</a></li>
+								  <%}%>
 							  </ul>
 							</li>
 						  </ul>
