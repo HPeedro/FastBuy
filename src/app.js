@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 const app = express();
 const router = express.Router();
 
-mongoose.connect('mongodb://balta:a1b2c3d4@ds155862.mlab.com:55862/baltaio');
-//mongoose.connect('mongodb+srv://pedro:<password>@pucc01-httmr.mongodb.net/test?retryWrites=true&w=majority');
+//mongoose.connect('mongodb://balta:a1b2c3d4@ds155862.mlab.com:55862/baltaio');
+mongoose.connect('mongodb+srv://pedro:pedro@pucc01-httmr.mongodb.net/baltaio?retryWrites=true&w=majority');
 const Product = require('./models/product');
 const Pedido = require('./models/pedido');
 const User = require('./models/user');

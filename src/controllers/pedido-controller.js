@@ -66,6 +66,7 @@ exports.post = async(req, res, next) => {
             user
        });
     }).catch(e =>{
+        res.render('novoLogin');
         res.status(400).send({
             message:'Falha ao cadastrar pedido ',
             data:e
