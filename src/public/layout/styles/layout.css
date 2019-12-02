@@ -374,8 +374,8 @@ input:focus, textarea:focus, *:required:focus{border-color:#82B7DF;}
 
 
 /* Services */
-#services li article{color:#FFFFFF; background-color:#82B7DF;}
-#services li:nth-child(even) article{background-color:#256492;}
+#services li article{color:#000000; background-color:#FFFFFF;}
+#services li:nth-child(even) article{background-color:#FFFFFF;}
 #services li article a{color:inherit;}
 #services li article > a > i{color:#474747; background:#FFFFFF; border-color:rgba(0,0,0,.1); box-shadow:2px 3px 0px 0px rgba(0,0,0,.3);}
 #services li article:hover > a > i{color:#82B7DF;}
