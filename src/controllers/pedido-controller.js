@@ -37,7 +37,7 @@ exports.get = async (req, res, next) => {
         
 
         res.render('carrinho.ejs',{
-            user,lista:data,preco
+            userid,user,lista:data,preco
         });
 
       //  res.status(200).send(data);
@@ -74,3 +74,4 @@ exports.post = async(req, res, next) => {
     });
     
 };
+
