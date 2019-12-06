@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'main_communication_widgets.dart';
 
+import 'package:http/http.dart';
+
 void main() => runApp(MaterialApp(
   theme: ThemeData(
     primarySwatch: Colors.blue,

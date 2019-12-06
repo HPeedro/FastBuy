@@ -3,6 +3,8 @@ import 'child1_page.dart';
 import 'child2_page.dart';
 import 'LoginScreen.dart';
 
+import 'globals.dart' as globals;
+
 class ParentPage extends StatefulWidget {
   @override
   ParentPageState createState() => ParentPageState();
@@ -62,6 +64,14 @@ class ParentPageState extends State<ParentPage>
     });
   }
 
+  updateUserInfo() {
+
+    setState(() {
+//      myTitle = globals.isLoggedIn.toString();
+      myTitle = globals.user['name'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ParentProvider(
@@ -79,12 +89,15 @@ class ParentPageState extends State<ParentPage>
               child: Text('Login'),
               color: Theme.of(context).primaryColor,
               textColor: Colors.white,
-              onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => LoginScreen(),
-                  )
-    )
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => LoginScreen(),
+                    )
+                );
+                updateUserInfo();
+              }
           ),
           TabBar(
             controller: _controller,
