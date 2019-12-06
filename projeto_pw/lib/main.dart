@@ -3,6 +3,8 @@ import 'main_communication_widgets.dart';
 
 import 'package:http/http.dart';
 
+import 'globals.dart' as globals;
+
 void main() => runApp(MaterialApp(
   theme: ThemeData(
     primarySwatch: Colors.blue,
@@ -18,6 +20,9 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+
+
+
   onButtonTap(Widget page) {
     Navigator.push(
         context, MaterialPageRoute(builder: (BuildContext context) => page));

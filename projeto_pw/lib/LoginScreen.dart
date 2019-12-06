@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
     if(formKey.currentState.validate()){
       formKey.currentState.save();
 
-      String url = 'http://192.168.0.103:3000/user';
+      String url = 'http://'+globals.ip+':3000/user';
       Response response = await get(url);
 
 

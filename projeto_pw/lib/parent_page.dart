@@ -116,11 +116,7 @@ class ParentPageState extends State<ParentPage>
             child: TabBarView(
               controller: _controller,
               children: [
-                Child1Page(
-                  title: updateChild1Title,
-                  child2Action2: updateParent,
-                  child2Action3: updateChild2,
-                ),
+                Child1Page(),
                 Child2Page(),
               ],
             ),

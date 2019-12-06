@@ -1,17 +1,20 @@
+import 'dart:convert';
+
+import 'LoginScreen.dart';
+
 import 'package:flutter/material.dart';
 import 'parent_page.dart';
-import 'ProductScreen.dart';
+
+import 'package:http/http.dart';
+
+import 'globals.dart' as globals;
 
 class Child1Page extends StatefulWidget {
   final String title;
-  final ValueChanged<String> child2Action3;
-  final ValueChanged<String> child2Action2;
 
   const Child1Page({
     Key key,
     this.title,
-    this.child2Action2,
-    this.child2Action3,
   }) : super(key: key);
 
   @override
@@ -19,61 +22,74 @@ class Child1Page extends StatefulWidget {
 }
 
 class Child1PageState extends State<Child1Page> {
-  String value = "Informações do Produto";
-  String _nome, _preco;
-  final formKey = GlobalKey<FormState>();
+  String value = "Produtos disponiveis";
+
+
+
 
   @override
   Widget build(BuildContext context) {
+    final title = ParentProvider.of(context).title;
+
     return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        children: [
-          Text(
-            widget.title ?? value,
-            style: Theme.of(context).primaryTextTheme.headline,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-                labelText: 'Nome:'
-            ),
-            onSaved: (input) => _nome = input,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-                labelText: 'Preço:'
-            ),
-            onSaved: (input) => _preco = input,
-            obscureText: true,
-          ),
-          RaisedButton(
-            //Change Tab from Child 1 to Child 2
-            child: Text("Pesquisar"),
-            onPressed: () {
-              _submit();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => ProductScreen(),
-                  )
-              );
-            },
-          ),
-          RaisedButton(
-            //Change Tab from Child 1 to Child 2
-            child: Text("Ver seu Carrinho"),
-            onPressed: () {
-              final controller = ParentProvider.of(context).tabController;
-              controller.index = 1;
-            },
-          )
-        ],
-      ),
+        padding: const EdgeInsets.all(15.0),
+        child: FutureBuilder(
+          builder: (context, projectSnap) {
+            if ((projectSnap.connectionState == ConnectionState.waiting)) {
+              //print('project snapshot data is: ${projectSnap.data}');
+              return Text('Waiting...');
+            }
+            List<dynamic> prod = jsonDecode(projectSnap.data.toString());
+//            globals.product = prod;
+//            print('DATA: '+prod.elementAt(0).toString());
+            return ListView.builder(
+              itemCount: prod.length,
+              itemBuilder: (context, index) {
+                List<dynamic> prodl = jsonDecode(projectSnap.data.toString());
+                Map<String, dynamic> prod = jsonDecode(jsonEncode(prodl.elementAt(index)));
+                //print('GLOBALS: '+globals.product.values.elementAt(0));
+                return Column(
+                  children: [
+                    RaisedButton(
+                        child: Text(prod['title']+' | '+prod['price'].toString()+' R\$'),
+                        color: Theme.of(context).primaryColor,
+                        textColor: Colors.white,
+                        onPressed: () {
+                            if(globals.isLoggedIn){
+                              _postCarrinho(prod['_id']);
+                            } else {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => LoginScreen(),
+                                  )
+                              );
+                            }
+                        }
+                    ),
+                    // Widget to display the list of project
+//                    Text(prod['title']),
+                  ],
+                );
+              },
+            );
+          },
+          future: _makeList(),
+        )
     );
+
   }
-  void _submit(){
-      //formKey.currentState.save();
-      print(_nome);
-      print(_preco);
+
+  Future _postCarrinho(String _id) async{
+
   }
+
+  Future _makeList() async{
+    String url = 'http://'+globals.ip+':3000/products';
+    Response response = await get(url);
+    print('HTTP_SC: '+response.statusCode.toString());
+    return response.body;
+  }
+
 }
+
